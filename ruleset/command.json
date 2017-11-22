@@ -1,0 +1,17 @@
+{
+    "rulerset": [
+        {
+            "id": "120", 
+            "msg": "command injection", 
+            "pattern": "whoami|ping |/etc/passwd|ifconfig|\\.\\.|\\%2e\\%2e", 
+            "mode": "normal", 
+            "translate": "url_decode", 
+            "log":"yes",
+            "status":"deny",
+            "vars": {
+                "type": "args"
+            }
+        }
+       
+    ]
+}
