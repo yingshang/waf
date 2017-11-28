@@ -24,6 +24,7 @@ http {
 	include       mime.types;
 	default_type  application/octet-stream;
 	sendfile        on;
+	#生产环境设置为on
 	lua_code_cache off;
 	lua_package_path "/opt/waf/waf/?.lua;;"; 
 	lua_shared_dict rules_dict 20m;
@@ -45,5 +46,7 @@ http {
 ```
 # WAF架构图
 ![](https://github.com/yingshang/waf/blob/master/static/waf%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
-#火焰图
+# 火焰图
 ![](https://github.com/yingshang/waf/blob/master/static/flame.svg)
+# 性能测试
+![](https://github.com/yingshang/waf/blob/master/static/waf.png)
