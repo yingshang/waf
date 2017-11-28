@@ -48,3 +48,5 @@ http {
 ![](https://github.com/yingshang/waf/blob/master/static/waf%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
 # 火焰图
 ![](https://github.com/yingshang/waf/blob/master/static/flame.svg)
+# 性能测试
+![](https://github.com/yingshang/waf/blob/master/static/waf.png)
