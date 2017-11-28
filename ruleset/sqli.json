@@ -3,7 +3,7 @@
         {
             "id": "100",
             "msg": "sql injection attack",
-            "pattern": "union |select |concat\\(|ELT|iif|RLIKE|THEN |sleep\\(|where|information_schema|delay| and |dbenchmark|case |when| all |group|(order by)|from|boolean| if | NOT | or | or|or |having|benchmark|INFERENCE|MAKE_SET|ISNULL|TIMESTAMPADD|QUARTER|'",
+            "pattern": "union |select |concat\\(|ELT|iif|RLIKE|THEN |sleep\\(|where|information_schema|delay| and |dbenchmark|case |when| all |group |(order by)|from |boolean| if | NOT | or | or|or |having|benchmark|INFERENCE|MAKE_SET|ISNULL|TIMESTAMPADD|QUARTER",
             "mode": "normal",
             "translate": "url_decode",
             "log": "yes",

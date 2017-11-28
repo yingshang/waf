@@ -8,9 +8,17 @@ path = string.sub(path, 2, -1)
 path = string.match(path, "^.*/")  
 ------------------------------------
 
+local rules = {}
+local rules_dict = ngx.shared.rules_dict
+local white_dict = ngx.shared.white_dict
+local black_dict = ngx.shared.black_dict
+local config_dict = ngx.shared.config_dict
 
 
---检测table
+
+
+
+--检测table是不是为空
 function check_table(t)
     if next(t) == nil then
         ngx.log(ngx.ERR,"table is nil")
@@ -20,12 +28,6 @@ function check_table(t)
         end
     end
 end
-
-local config = {}
-local config_dict = ngx.shared.config_dict
-local white_dict = ngx.shared.white_dict
-local black_dict = ngx.shared.black_dict
-
 
 --分割字符串函数
 function Split(szFullString, szSeparator)  
@@ -66,13 +68,28 @@ function ruleread()
                 black_dict:safe_set("blacklist",cjson_safe.encode(r),0)
             --将规则文件放进dict
             else
-                config[filename] = r 
+                rules[filename] = r 
             end
         end    
     end
-    config_dict:safe_set("config",cjson_safe.encode(config),0)
-
+    rules_dict:safe_set("rules",cjson_safe.encode(rules),0)
 
 end  
 
 ruleread()
+config_dict:safe_set("configlist",cjson_safe.encode(config),0)
+file = io.open("/data/waf/waf.log","a+")
+
+
+
+
+--regex = "\\.jpg|\\.png|\\.css|\\.js|\\.bmp"
+
+--if ngx.re.find(Content_Type, [=[^multipart/form-data; boundary=]=],"joi") then
+    --check_upload()
+--    _t = "pass"
+--elseif ngx.re.match(request_uri,regex,"joi")then
+--    _t = "pass"
+--else
+--detect(rules)
+--end

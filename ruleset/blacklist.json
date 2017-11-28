@@ -3,7 +3,7 @@
         {
             "id": "200", 
             "msg": "black IP", 
-            "pattern": "111111111111", 
+            "pattern": "213213", 
             "mode": "normal", 
             "status":"deny",
             "log":"no",
