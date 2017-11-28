@@ -24,6 +24,7 @@ http {
 	include       mime.types;
 	default_type  application/octet-stream;
 	sendfile        on;
+	#生产环境设置为on
 	lua_code_cache off;
 	lua_package_path "/opt/waf/waf/?.lua;;"; 
 	lua_shared_dict rules_dict 20m;
