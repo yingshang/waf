@@ -3,7 +3,7 @@
         {
             "id": "200", 
             "msg": "white IP", 
-            "pattern": "192.168.50.76", 
+            "pattern": "2222222", 
             "mode": "normal", 
             "status":"allow",
             "log":"no",

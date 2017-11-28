@@ -32,7 +32,6 @@ local black = cjson_safe.decode(black_dict:get("blacklist")) or {}
 --检测是否是静态文件
 if request.check_static() then
     _pass = 'pass'
-    ngx.log(ngx.ERR,_pass)
 elseif request.whiteallow(white)then
     _pass = 'pass'
 else
