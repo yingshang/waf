@@ -44,6 +44,9 @@ http {
 	}
 }
 ```
+# 实战视频
+https://youtu.be/qTkg0qmqMok
+
 # WAF架构图
 后续会添加文件上传过滤，防DD，以及一些服务器的漏洞的虚拟补丁。
 ![](https://github.com/yingshang/waf/blob/master/static/waf%E8%AE%BE%E8%AE%A1%E5%9B%BE.jpg)
