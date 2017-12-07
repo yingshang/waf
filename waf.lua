@@ -8,7 +8,7 @@ ngx.log(ngx.ERR,output)
 --]]
 
 
-local request = require("request")
+local request = require "request"
 local cjson_safe = require "cjson.safe"
 
 local rules_dict = ngx.shared.rules_dict
@@ -31,12 +31,13 @@ local black = cjson_safe.decode(black_dict:get("blacklist")) or {}
 
 --检测是否是静态文件
 if request.check_static() then
-    _pass = 'pass'
+    local _pass = 'pass'
 elseif request.whiteallow(white)then
-    _pass = 'pass'
+    local _pass = 'pass'
+
 else
     --检测规则
-    request.detect(rules)
+     request.detect(rules)
 end
 
 

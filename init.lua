@@ -4,8 +4,8 @@ local lfs = require"lfs"
 ---------------当前文件路径-------------------
 local info = debug.getinfo(1, "S")
 local path = info.source
-path = string.sub(path, 2, -1)
-path = string.match(path, "^.*/")  
+local path1 = string.sub(path, 2, -1)
+local path2 = string.match(path1, "^.*/")  
 ------------------------------------
 
 local rules = {}
@@ -13,21 +13,25 @@ local rules_dict = ngx.shared.rules_dict
 local white_dict = ngx.shared.white_dict
 local black_dict = ngx.shared.black_dict
 local config_dict = ngx.shared.config_dict
-
-
+local logic_dict = ngx.shared.logic_dict
+local calc_dict = ngx.shared.calc_dict
 
 
 
 --检测table是不是为空
+--[[
 function check_table(t)
     if next(t) == nil then
         ngx.log(ngx.ERR,"table is nil")
-    else
+    elses
         for k,v in pairs(t)do
             ngx.log(ngx.ERR,k.."----"..v)
         end
     end
 end
+--
+]]
+
 
 --分割字符串函数
 function Split(szFullString, szSeparator)  
@@ -48,12 +52,12 @@ function Split(szFullString, szSeparator)
     end  
 
 
---读取本地json
+--读取基本的规则json
 function ruleread() 
-    path = path.."ruleset/"
-    for file in lfs.dir(path) do    
+    local filepath = path2.."ruleset/"
+    for file in lfs.dir(filepath) do    
         if file ~= "." and file ~= ".." then    
-            local fname = path..file
+            local fname = filepath..file
             local f = io.open(fname, "r")  
             local json = f:read("*a")  
             f:close()
@@ -66,6 +70,8 @@ function ruleread()
             --将黑名单放进dict
             elseif filename == "blacklist" then
                 black_dict:safe_set("blacklist",cjson_safe.encode(r),0)
+            elseif filename == "logic" then
+                logic_dict:safe_set("logic",cjson_safe.encode(r),0)
             --将规则文件放进dict
             else
                 rules[filename] = r 
@@ -76,10 +82,14 @@ function ruleread()
 
 end  
 
+
+
+
+
+
 ruleread()
 config_dict:safe_set("configlist",cjson_safe.encode(config),0)
 file = io.open("/data/waf/waf.log","a+")
-
 
 
 

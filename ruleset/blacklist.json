@@ -3,7 +3,7 @@
         {
             "id": "200", 
             "msg": "black IP", 
-            "pattern": "213213", 
+            "pattern": "21321", 
             "mode": "normal", 
             "status":"deny",
             "log":"no",
@@ -14,12 +14,12 @@
         {
             "id": "201", 
             "msg": "black url", 
-            "pattern": "33333", 
+            "pattern": "test.do", 
             "mode": "normal", 
             "status":"deny",
             "log":"no",
             "vars": {
-                "type": "remote_ip"
+                "type": "request_uri"
             }
         }
        
