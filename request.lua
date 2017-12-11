@@ -1,5 +1,10 @@
 --local request_method      = ngx.req.get_method()
 --local args = ngx.req.get_uri_args()
+
+
+
+
+
 --post的json数据递归调用
 function json_parse(value)
     local _value = ""
@@ -29,6 +34,7 @@ function check_upload()
         return true
     end
 end
+
 
 --post方式的判断，正常和json
 function post_check()
@@ -147,6 +153,7 @@ function detect(rules)
             end
         end
     end
+
 end
 
 
@@ -183,11 +190,25 @@ function check_static()
     if m then
         return true
     end
-    
 end
 
 
-
+--IP控制黑名单,10秒内打出1000的访问量就封IP
+function ip_control()
+    local remote_ip = ngx.var.remote_addr --客户端IP
+    local calc_dict = ngx.shared.calc_dict
+    local get_ip = calc_dict:get(remote_ip)
+    if get_ip == nil then
+        calc_dict:safe_set(remote_ip,1,10)
+    else
+        calc_dict:incr(remote_ip,1)
+        --ngx.log(ngx.ERR,calc_dict:get(remote_ip))
+        local count = calc_dict:get(remote_ip)
+        if  count > 1000 then
+            ngx.exit(403)
+        end
+    end
+end
 
 
 local request={}
@@ -195,4 +216,5 @@ request.blackdeny =blackdeny
 request.whiteallow = whiteallow
 request.detect = detect
 request.check_static = check_static
+request.ip_control = ip_control
 return request

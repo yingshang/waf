@@ -21,6 +21,7 @@ local white = cjson_safe.decode(white_dict:get("whitelist")) or {}
 local black = cjson_safe.decode(black_dict:get("blacklist")) or {}
 --local config = cjson_safe.decode(config_dict:get("configlist")) or {}
 
+request.ip_control() 
 
 
 --匹配到黑名单直接403
