@@ -14,7 +14,7 @@ local white_dict = ngx.shared.white_dict
 local black_dict = ngx.shared.black_dict
 local config_dict = ngx.shared.config_dict
 local logic_dict = ngx.shared.logic_dict
-local calc_dict = ngx.shared.calc_dict
+
 
 
 

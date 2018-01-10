@@ -3,7 +3,7 @@
         {
             "id": "200", 
             "msg": "white IP", 
-            "pattern": "2222222", 
+            "pattern": "2222222s", 
             "mode": "normal", 
             "status":"allow",
             "log":"no",

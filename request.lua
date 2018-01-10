@@ -1,10 +1,3 @@
---local request_method      = ngx.req.get_method()
---local args = ngx.req.get_uri_args()
-
-
-
-
-
 --post的json数据递归调用
 function json_parse(value)
     local _value = ""
@@ -17,9 +10,14 @@ function json_parse(value)
             end
         end
         return _value
-        
+    elseif type(value) == "userdata" then
+        value = ""
+    elseif type(value) == "boolean" then
+        value = tostring(value)
+    else
+        _ = "pass"
     end
-return value
+    return value
 end
 
 
@@ -45,9 +43,9 @@ function post_check()
     local post_data =  ngx.req.get_body_data()
     local cjon_post = cjson_safe.decode(post_data)
     if post_data == nil then
-        local _t = 'pass'  
+        parms = ""  
     elseif check_upload() then
-        local _t = 'pass'
+        parms = ""
     else
         if cjon_post == nil then
             for _,v in pairs(post_args)do
@@ -55,20 +53,18 @@ function post_check()
             end
         else
             for _,v in pairs(cjon_post)do
-                if(type(v))~="string"then
-                    v = tostring(v)
-                end
                 parms = json_parse(v).."-"..parms
             end
         end
     return parms
+
 end   
 end
 
 --获取GET数据
 function get_data()
+    local args = ngx.req.get_uri_args()
     local parms = ""
-    local args = ngx.req.get_uri_args() 
     for _,v in pairs(args)do
         if type(v) ~= "boolean" then
         parms = v.."-"..parms
@@ -77,9 +73,9 @@ function get_data()
     return parms
 end
 
-
+--获取cookie，有时候cookie的变量名会重复
 function getcookie()
-    local request_headers     = ngx.req.get_headers()
+    local request_headers  = ngx.req.get_headers()
     local _cookie = request_headers['Cookie'] 
     local _tmp = ""
     if type(_cookie) == "table"then
@@ -94,7 +90,11 @@ end
 
 --变量类型
 function var_type( vars )
-    local post_data =  post_check() or ""
+    local request_method  = ngx.req.get_method()
+    local post_data = ""
+    if request_method == 'POST' then
+        post_data = post_check() or ""
+    end
     local request_headers     = ngx.req.get_headers()
     local User_Agent = request_headers['User-Agent'] or ""
     local Cookie = getcookie() or ""

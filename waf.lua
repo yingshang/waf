@@ -21,7 +21,7 @@ local white = cjson_safe.decode(white_dict:get("whitelist")) or {}
 local black = cjson_safe.decode(black_dict:get("blacklist")) or {}
 --local config = cjson_safe.decode(config_dict:get("configlist")) or {}
 
-request.ip_control() 
+--request.ip_control() 
 
 
 --匹配到黑名单直接403
@@ -41,4 +41,9 @@ else
      request.detect(rules)
 end
 
-
+--测试时间，微秒级和毫秒级
+--local time_helper = require "time_helper"
+--local a = time_helper.current_time_millis()
+--local b = time_helper.current_time_millis()
+--ngx.log(ngx.ERR,a..'--'..b)
+--ngx.log(ngx.ERR,(b-a)*1000)

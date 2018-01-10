@@ -3,7 +3,7 @@
         {
             "id": "110", 
             "msg": "XSS attack", 
-            "pattern": "<script.*>|\\>|\\<|</script>|javascript:|<img.*>|<iframe.*>|alert|</a>|</div>|<div.*>|<body.*>|<layer.*>|</img>|</layer>|<a.*>|<svg.*>|onerror|eval(.*)|<video.*>|<object.*>|<input.*>|<style.*>|<form.*>|<plaintext.*>|<embet.*>", 
+            "pattern": "<script.*>|</script>|javascript:|<iframe.*>|alert|</a>|</div>|<div.*>|<body.*>|<layer.*>|</layer>|<a.*>|<svg.*>|onerror|eval(.*)|<video.*>|<object.*>|<input.*>|<style.*>|<form.*>|<plaintext.*>|<embet.*>", 
             "mode": "normal", 
             "translate": "url_decode", 
             "log":"yes",
